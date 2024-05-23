@@ -1,23 +1,27 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn,OneToMany } from 'typeorm';
+import { PropuestaEntity } from "../propuesta/propuesta.entity";
 
 @Entity()
-export class MuseumEntity {
+export class ProfesorEntity {
  @PrimaryGeneratedColumn('uuid')
  id: string;
 
  @Column()
- name: string;
+ no_cedula: number;
  
  @Column()
- description: string;
+ nombre: string;
  
  @Column()
- address: string;
+ grupo_investigacion: string;
  
  @Column()
- city: string;
+ no_extension: number;
 
  @Column()
  image: string;
+
+ @OneToMany(() => PropuestaEntity, propuesta => propuesta.profesor)
+    propuestas: PropuestaEntity[];
 }
