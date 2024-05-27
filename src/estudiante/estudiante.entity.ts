@@ -17,7 +17,6 @@ codigo_estudiante: string;
  no_creditos_aprobados: number;
 
  @OneToOne(() => ProyectoEntity, proyecto => proyecto.estudiante)
-   @JoinColumn()
    proyecto: ProyectoEntity;
 
 }

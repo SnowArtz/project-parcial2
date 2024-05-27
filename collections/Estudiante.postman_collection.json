@@ -1,0 +1,287 @@
+{
+	"info": {
+		"_postman_id": "17d04f5b-7726-473a-9799-c99164c3b993",
+		"name": "Estudiante",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34997290"
+	},
+	"item": [
+		{
+			"name": "Add a Estudiante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verifica que la creación de un estudiante devuelva el código de estado 201 y que la respuesta incluya todas las propiedades esperadas.\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    // Esta prueba se eligió para asegurarse de que la operación de creación sea exitosa y devuelva el código correcto.\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains all expected properties\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"estudiante_id\", jsonData.id); // Guardar ID para uso posterior\r",
+							"    // Esta prueba se eligió para verificar que la respuesta contenga todas las propiedades esperadas después de crear un estudiante.\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData).to.have.property(\"nombre\", \"Carlos Mendoza\");\r",
+							"    pm.expect(jsonData).to.have.property(\"codigo_estudiante\", \"2024101234\");\r",
+							"    pm.expect(jsonData).to.have.property(\"no_creditos_aprobados\", 30);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Carlos Mendoza\",\r\n  \"codigo_estudiante\": \"2024101234\",\r\n  \"no_creditos_aprobados\": 30\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/estudiantes",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"estudiantes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add a Estudiante",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Carlos Mendoza\",\r\n  \"codigo_estudiante\": \"2024101234\",\r\n  \"no_creditos_aprobados\": 30\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/estudiantes",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"estudiantes"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "141"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"8d-sN22kTakR2l/8qRTC40Zkw8jLU4\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 27 May 2024 01:17:35 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"id\": \"48a9ab90-1276-11ed-861d-0242ac120002\",\n  \"nombre\": \"Carlos Mendoza\",\n  \"codigo_estudiante\": \"2024101234\",\n  \"no_creditos_aprobados\": 30\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Get one Estudiante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verifica que la obtención de un estudiante por ID devuelva el código de estado 200 y que la respuesta incluya todas las propiedades esperadas.\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    // Esta prueba se eligió para asegurarse de que la operación de obtención sea exitosa y devuelva el código correcto.\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains all expected properties\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    // Esta prueba se eligió para verificar que la respuesta contenga todas las propiedades esperadas al obtener un estudiante.\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData).to.have.property(\"nombre\");\r",
+							"    pm.expect(jsonData).to.have.property(\"codigo_estudiante\");\r",
+							"    pm.expect(jsonData).to.have.property(\"no_creditos_aprobados\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/estudiantes/{{estudiante_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"estudiantes",
+						"{{estudiante_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get one Estudiante",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/estudiantes/{{estudiante_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"estudiantes",
+								"{{estudiante_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n  \"id\": \"1e061964-1276-11ed-861d-0242ac120002\",\r\n  \"nombre\": \"Carlos Mendoza\",\r\n  \"codigo_estudiante\": \"2024101234\",\r\n  \"no_creditos_aprobados\": 30\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Get an Invalid Estudiante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verifica que la obtención de un estudiante inválido devuelva el código de estado 404 y un mensaje de error apropiado.\r",
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    // Esta prueba se eligió para asegurarse de que la operación de obtención de un ID inválido maneje correctamente el error.\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains error message\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    // Esta prueba se eligió para verificar que la respuesta contenga un mensaje de error adecuado cuando el estudiante no se encuentra.\r",
+							"    pm.expect(jsonData).to.have.property(\"statusCode\", 404);\r",
+							"    pm.expect(jsonData).to.have.property(\"message\", \"The estudiante with the given id was not found\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/estudiantes/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"estudiantes",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get an invalid Estudiante",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/estudiantes/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"estudiantes",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "76"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4c-8aMTdU8H6SbgqhWya5JqLDyr1p4\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 27 May 2024 01:49:34 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The estudiante with the given id was not found\"\n}"
+				}
+			]
+		}
+	]
+}

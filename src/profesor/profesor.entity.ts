@@ -19,8 +19,7 @@ export class ProfesorEntity {
  @Column()
  no_extension: number;
 
- @Column()
- image: string;
+    
 
  @OneToMany(() => PropuestaEntity, propuesta => propuesta.profesor)
     propuestas: PropuestaEntity[];

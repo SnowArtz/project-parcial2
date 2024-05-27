@@ -18,10 +18,10 @@ fecha_fin: Date;
 URL: string;
 
 @OneToOne(() => EstudianteEntity, estudiante => estudiante.proyecto)
-    estudiante: EstudianteEntity;
+@JoinColumn()
+estudiante: EstudianteEntity;
 
     @OneToOne(() => PropuestaEntity, propuesta => propuesta.proyecto)
-    @JoinColumn()
     propuesta: PropuestaEntity;
 
 }

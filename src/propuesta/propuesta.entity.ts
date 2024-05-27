@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne,ManyToOne } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne,ManyToOne, JoinColumn } from 'typeorm';
 import { ProyectoEntity } from "../proyecto/proyecto.entity";
 import { ProfesorEntity } from "../profesor/profesor.entity";
 
@@ -18,7 +18,8 @@ descripcion: string;
 palabra_clave: string;
 
 @OneToOne(() => ProyectoEntity, proyecto => proyecto.propuesta)
-    proyecto: ProyectoEntity;
+@JoinColumn()
+proyecto: ProyectoEntity;
 
     @ManyToOne(() => ProfesorEntity, profesor => profesor.propuestas)
     profesor: ProfesorEntity;

@@ -19,7 +19,7 @@ export class PropuestaService {
     }
 
     async findPropuestaById(id: string): Promise<PropuestaEntity> {
-        const propuesta = await this.propuestaRepository.findOne({ where: { id }, relations: ["proyectos", "estudiantes", "profesor"] });
+        const propuesta = await this.propuestaRepository.findOne({ where: { id }, relations: ["proyecto", "profesor"] });
         if (!propuesta) {
             throw new BusinessLogicException("The propuesta with the given id was not found", BusinessError.NOT_FOUND);
         }
@@ -27,16 +27,16 @@ export class PropuestaService {
     }
 
     async findAllPropuestas(): Promise<PropuestaEntity[]> {
-        return await this.propuestaRepository.find({ relations: ["proyectos", "estudiantes", "profesor"] });
+        return await this.propuestaRepository.find({ relations: ["proyecto", "profesor"] });
     }
 
     async deletePropuestaById(id: string) {
-        const propuesta = await this.propuestaRepository.findOne({ where: { id }, relations: ["proyectos"] });
+        const propuesta = await this.propuestaRepository.findOne({ where: { id }, relations: ["proyecto"] });
         if (!propuesta) {
             throw new BusinessLogicException("The propuesta with the given id was not found", BusinessError.NOT_FOUND);
         }
 
-        if (propuesta.proyectos.length > 0) {
+        if (propuesta.proyecto) {
             throw new BusinessLogicException("Cannot delete propuesta por las reglas del parcial", BusinessError.PRECONDITION_FAILED);
         }
 

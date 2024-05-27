@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "9d9380c1-1572-49bb-a9f7-e513f39db535",
+		"name": "Proyecto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34997290"
+	},
+	"item": [
+		{
+			"name": "Add a proyecto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verifica que la creación de un proyecto devuelva el código de estado 201 y que la respuesta incluya todas las propiedades esperadas.\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    // Esta prueba se eligió para asegurarse de que la operación de creación sea exitosa y devuelva el código correcto.\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains all expected properties\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"proyecto_id\", jsonData.id); // Guardar ID para uso posterior\r",
+							"    // Esta prueba se eligió para verificar que la respuesta contenga todas las propiedades esperadas después de crear un proyecto.\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData).to.have.property(\"fecha_inicio\");\r",
+							"    pm.expect(jsonData).to.have.property(\"fecha_fin\");\r",
+							"    pm.expect(jsonData).to.have.property(\"URL\", \"http://example.com\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"fecha_inicio\": \"2023-01-01\",\r\n  \"fecha_fin\": \"2024-01-01\",\r\n  \"URL\": \"http://example.com\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/proyectos",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"proyectos"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add a Proyecto",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fecha_inicio\": \"2023-01-01\",\r\n  \"fecha_fin\": \"2024-01-01\",\r\n  \"URL\": \"http://example.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/proyectos",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"proyectos"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "125"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"7d-2jNDDT8lwWBeUE6z/VihvMFfC34\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 27 May 2024 02:31:04 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"fecha_inicio\": \"2023-01-01\",\n    \"fecha_fin\": \"2024-01-01\",\n    \"URL\": \"http://example.com\",\n    \"id\": \"fa977b8e-36d7-4b03-994e-1d288b9459ac\"\n}"
+				}
+			]
+		}
+	]
+}
